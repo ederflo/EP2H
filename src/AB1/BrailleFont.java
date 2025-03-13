@@ -9,11 +9,11 @@ import AB1.Interfaces.Encoder;
  */
 public class BrailleFont implements AB1.Interfaces.Font {
 
-    // TODO: choose appropriate access modifier (public/private)
-    public final int height;   // height of characters
+    private static final int defaultHeight = 3;
+    private static final int defaultWidth = 2;
 
-    // TODO: choose appropriate access modifier (public/private)
-    public final int width;    // width of characters (remark: font is monospaced)
+    private final int height;   // height of characters
+    private final int width;    // width of characters (remark: font is monospaced)
 
     /**
      * A 3-dimensional array containing printable Braille characters (bitmaps) in ascending alphabetic order.
@@ -24,16 +24,14 @@ public class BrailleFont implements AB1.Interfaces.Font {
      * Other characters, such as white space, are handled separately.</p>
      *
      */
-    // TODO: choose appropriate access modifier (public/private)
-    public final char[][][] lowerCaseLetters;    // bitmaps for all lowercase letters
+    private final char[][][] lowerCaseLetters;    // bitmaps for all lowercase letters
 
     /**
      * Represents the white space character .
      * <p>This array provides a printable representation (bitmap) of a white space within Braille texts.</p>
      * <p>The array is initialized during the construction of the {@code BrailleFont} object.</p>
      */
-    // TODO: choose appropriate access modifier (public/private)
-    public final char[][] whiteSpace;    // bitmap for the white space character (contains space symbols only)
+    private final char[][] whiteSpace;    // bitmap for the white space character (contains space symbols only)
 
 
     /**
@@ -46,9 +44,33 @@ public class BrailleFont implements AB1.Interfaces.Font {
      * @param encoder       the Braille encoder ({@code class BrailleEncoder}) used to calculate the font's bitmaps at construction time.
      *                      <p>Precondition: (encoder != null)</p>
      */
-    // TODO: choose appropriate access modifier (public/private)
+    // other size than 3x2 makes no sense
     public BrailleFont(int height, int width, char dotSymbol, char spaceSymbol, Encoder encoder) {
-        // TODO: implementation
+        this.height = height;
+        this.width = width;
+        lowerCaseLetters = new char[26][height][width];
+        whiteSpace = new char[height][width];
+
+        // fill bitmap array for every lower case letter
+        for (int i = 0; i <= ('z' - 'a'); i++) {
+            char charToParse = (char) ('a' + i);
+            byte binary = encoder.toBinary(charToParse);
+
+            for (int j = 0; j < height; j++) {
+                for (int k = 0; k < width; k++) {
+                    if (j < defaultHeight && k < defaultWidth) {
+                        lowerCaseLetters[i][j][k] = ((binary >> j + (defaultHeight * k)) & 1) == 1 ? dotSymbol : spaceSymbol;
+                    } else { // if size is bigger than expected, just set spaceSymbol
+                        lowerCaseLetters[i][j][k] = spaceSymbol;
+                    }
+                }
+            }
+        }
+
+        // fill whitespace array
+        for (int i = 0; i < height; i++)
+            for (int j = 0; j < width; j++)
+                whiteSpace[i][j] = spaceSymbol;
     }
 
 
@@ -60,11 +82,12 @@ public class BrailleFont implements AB1.Interfaces.Font {
      *         For letters, it returns the corresponding lowercase printable character from array {@code lowerCaseLetters[]}.
      *         For non-letters, it returns the representation of a white space ({@code whiteSpace}).
      */
-    // TODO: choose appropriate access modifier (public/private)
     @Override
     public char[][] getBitmap(char character) {
-        // TODO: implementation
-        return null;
+        if (Character.isLetter(character))
+            return lowerCaseLetters[Character.toLowerCase(character) - 'a'];
+
+        return whiteSpace;
     }
 
     /**
@@ -72,21 +95,17 @@ public class BrailleFont implements AB1.Interfaces.Font {
      *
      * @return the number of rows of a character's bitmap.
      */
-    // TODO: choose appropriate access modifier (public/private)
     @Override
     public int getHeight(){
-        // TODO: implementation
-    	return 0;
+        return height;
     }
     /**
      * Returns the font's width (the font is monospaced).
      *
      * @return the number of columns of a character's bitmap.
      */
-    // TODO: choose appropriate access modifier (public/private)
     @Override
     public int getWidth(){
-        // TODO: implementation
-        return 0;
+        return width;
     }
 }

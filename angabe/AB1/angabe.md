@@ -129,12 +129,12 @@ eckigen Klammern vor einer Aussage schreiben, wenn diese Ihrer Meinung nach zutr
 Beantworten Sie nun nachfolgende Fragen gewissenhaft. Lesen Sie bei Bedarf dazu auch im Skriptum nach. 
 
 * Frage 1: Welche der folgenden Aussagen treffen auf Objektmethoden bzw. Klassenmethoden zu?
-- [ ] Klassenmethoden haben keinen Zugriff auf Objektvariablen.
+- [x] Klassenmethoden haben keinen Zugriff auf Objektvariablen.
 - [ ] Aufrufe von 'this(...)' sind in Klassenmethoden möglich.
 
 
 * Frage 2: Welche der folgenden Aussagen stimmen in Bezug auf Datenabstraktion?
-- [ ] Datenkapselung und Data-Hiding sind für Datenabstraktion hilfreich aber nicht zwingend nötig.
+- [x] Datenkapselung und Data-Hiding sind für Datenabstraktion hilfreich aber nicht zwingend nötig.
 - [ ] Datenabstraktion verhindert Änderungen von Objektzuständen.
 
 ### Teilaufgabe 2

@@ -13,17 +13,13 @@ import AB1.Interfaces.Font;
  * Calling the {@code flush()} method also clears the line buffer.</p>
  */
 public class LinePrinter {
-    // TODO: choose appropriate access modifier (public/private)
-    public char[][] lineBuffer;    // buffer that holds output (bitmaps of printed braille characters)
+    private char[][] lineBuffer;    // buffer that holds output (bitmaps of printed braille characters)
 
-    // TODO: choose appropriate access modifier (public/private)
-    public final Font font;        // font used to render output
+    private final Font font;        // font used to render output
 
-    // TODO: choose appropriate access modifier (public/private)
-    public final int spacing;      // spacing between braille characters (measured in output columns)
+    private final int spacing;      // spacing between braille characters (measured in output columns)
 
-    // TODO: choose appropriate access modifier (public/private)
-    public int cursorPosition;     // position within the lineBuffer where the next braille character will be printed
+    private int cursorPosition;     // position within the lineBuffer where the next braille character will be printed
 
     /**
      * Constructs a LinePrinter for rendering printable Braille text.
@@ -36,9 +32,11 @@ public class LinePrinter {
      * @param spacing    the number of blank screen spaces (ASCII columns) between Braille characters (bitmaps).
      *                   <p>Precondition: spacing > 0 </p>
      */
-    // TODO: choose appropriate access modifier (public/private)
     public LinePrinter(Font font, int lineLength, int spacing) {
-        // TODO: implementation
+        this.font = font;
+        this.spacing = spacing;
+
+        createLineBuffer(lineLength, font.getHeight(), font.getWidth());
     }
 
     /**
@@ -57,10 +55,12 @@ public class LinePrinter {
      * @param cellWidth  the width of each Braille character cell in columns. Is provided by {@code Font} object.
      *                   <p>Precondition: cellWidth > 0</p>
      */
-    // TODO: choose appropriate access modifier (public/private)
-    public void createLineBuffer(int lineLength, int cellHeight, int cellWidth){
-        // TODO: implementation
-
+    private void createLineBuffer(int lineLength, int cellHeight, int cellWidth) {
+        if (lineBuffer == null)
+            lineBuffer = new char[cellHeight][(lineLength * cellWidth) + ((lineLength - 1) * spacing)];
+        for (int i = 0; i < lineBuffer.length; i++)
+            for (int j = 0; j < lineBuffer[i].length; j++)
+                lineBuffer[i][j] = ' ';
     }
 
     /**
@@ -70,20 +70,34 @@ public class LinePrinter {
      *              <p>Precondition: (index >= 0) && (index < lineBuffer.length)</p>
      * @return the ASCII character array of the specified row.
      */
-    // TODO: choose appropriate access modifier (public/private)
-    public char[] getLineBufferRow(int index){
-        // TODO: implementation
-        return null;
+    // dont get the point of this method...
+    private char[] getLineBufferRow(int index){
+        return lineBuffer[index];
     }
 
 
     /**
      * Clears the line buffer by creating a new one and resetting the cursor position.
      */
-    // TODO: choose appropriate access modifier (public/private)
-    public void clearLine(){
-        // TODO: implementation
+    private void clearLine(){
+        createLineBuffer(-1, font.getHeight(), font.getWidth());
+        cursorPosition = 0;
+    }
 
+
+    /**
+     * Gets the exact calculated current index based on current cursor position
+     */
+    private int getCurrentIdx() {
+        return cursorPosition == 0 ? 0 : (cursorPosition * font.getWidth()) + ((cursorPosition - 1) * spacing);
+    }
+
+
+    /**
+     * Checks if printing another char is possible
+     */
+    private boolean validPrint() {
+        return getCurrentIdx() + spacing + font.getWidth() <= lineBuffer[0].length;
     }
 
     /**
@@ -97,10 +111,19 @@ public class LinePrinter {
      * @param character an ASCII character to be converted to a printable Braille representation
      *                  and printed into the line buffer.
      */
-    // TODO: choose appropriate access modifier (public/private)
     public void printCharacter(char character){
-        // TODO: implementation
+        char[][] bitMap = font.getBitmap(character);
 
+        if (!validPrint())
+            return;
+
+        int endingSpacingIdx = getCurrentIdx() != 0 ? getCurrentIdx() + spacing : 0;
+        int endingCharacterIdx = endingSpacingIdx + font.getWidth();
+        for (int i = 0; i < font.getHeight(); i++)
+            for (int j = endingSpacingIdx; j < endingCharacterIdx; j++)
+                lineBuffer[i][j] = bitMap[i][j - endingSpacingIdx];
+
+        cursorPosition++;
     }
 
     /**
@@ -109,19 +132,22 @@ public class LinePrinter {
      *
      * @param string the string to be printed.
      */
-    // TODO: choose appropriate access modifier (public/private)
     public void printString(String string){
-        // TODO: implementation
-
+        for (char c : string.toCharArray())
+            printCharacter(c);
     }
 
     /**
      * Flushes the content of the line buffer by printing each row to the standard output,
      * and then clearing the buffer by calling {@code clearLine()}.
      */
-    // TODO: choose appropriate access modifier (public/private)
-    public void flush(){
-        // TODO: implementation
+    public void flush() {
+        for (int i = 0; i < font.getHeight(); i++) {
+            for (char c : getLineBufferRow(i))
+                System.out.print(c);
+            System.out.println();
+        }
 
+        clearLine();
     }
 }

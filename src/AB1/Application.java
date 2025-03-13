@@ -1,7 +1,5 @@
 package AB1;
 
-import AB1.Interfaces.Encoder;
-
 /**
  * The Application class serves as the entry point to the program.
  * <p>This class is used to test and demonstrate the functionality of printing text in Braille format
@@ -13,7 +11,7 @@ public class Application {
     public static void main(String[] args) {
 
         // example from documentation
-        LinePrinter lp=new  LinePrinter(
+        LinePrinter lp = new  LinePrinter(
                                 new BrailleFont(
                                         3,
                                         2,
@@ -26,7 +24,17 @@ public class Application {
         lp.printString("Hello World");
         lp.flush();
 
-        // TODO: implementation of any developer specific tests (optional)
-
+        lp = new  LinePrinter(
+                new BrailleFont(
+                        3,
+                        2,
+                        'o',
+                        '.',
+                        new BrailleEncoder()),
+                5,
+                4
+        );
+        lp.printString("H!allo");
+        lp.flush();
     }
 }
