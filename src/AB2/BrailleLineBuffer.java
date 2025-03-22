@@ -141,7 +141,7 @@ public class BrailleLineBuffer implements LineBuffer {
     @Override
     public void push(char[][] bitmap) {
         expandBuffer();
-        buffer[count()] = Arrays.copyOf(bitmap, bitmap.length);
+        insert(count(), bitmap);
         currentSize++;
     }
 
