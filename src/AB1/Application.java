@@ -18,10 +18,49 @@ public class Application {
                                         'o',
                                         '.',
                                         new BrailleEncoder()),
-                                20,
+                                12,
                                 4
                             );
-        lp.printString("Hello World");
+        lp.printString("Hello!! World");
+        lp.flush();
+
+        lp = new  LinePrinter(
+                new BrailleFont(
+                        3,
+                        2,
+                        'o',
+                        '.',
+                        new BrailleEncoder()),
+                5,
+                4
+        );
+        lp.printString("H");
+        lp.flush();
+
+        lp = new  LinePrinter(
+                new BrailleFont(
+                        3,
+                        2,
+                        'o',
+                        '.',
+                        new BrailleEncoder()),
+                5,
+                4
+        );
+        lp.printString("");
+        lp.flush();
+
+        lp = new  LinePrinter(
+                new BrailleFont(
+                        3,
+                        2,
+                        'o',
+                        '.',
+                        new BrailleEncoder()),
+                1,
+                4
+        );
+        lp.printString(" ");
         lp.flush();
 
         lp = new  LinePrinter(

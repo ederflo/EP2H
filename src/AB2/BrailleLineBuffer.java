@@ -24,7 +24,6 @@ public class BrailleLineBuffer implements LineBuffer {
     private final int initialSize;
     private final double growthFactor;
     private final double reductionRatio;
-    private int maxSize;
     private int currentSize = 0;
 
     /**
@@ -52,7 +51,7 @@ public class BrailleLineBuffer implements LineBuffer {
      */
     @Override
     public int size() {
-        return maxSize;
+        return buffer.length;
     }
 
     /**
@@ -86,7 +85,7 @@ public class BrailleLineBuffer implements LineBuffer {
             return;
 
         int newMaxSize = (int)Math.ceil(size() * growthFactor);
-        resizeBuffer(newMaxSize == maxSize ? newMaxSize + 1 : newMaxSize);
+        resizeBuffer(newMaxSize == size() ? newMaxSize + 1 : newMaxSize);
     }
 
     /**
@@ -110,7 +109,7 @@ public class BrailleLineBuffer implements LineBuffer {
     @Override
     public void reduceBuffer() {
         // TODO: implementation
-        double usageRatio = (double)currentSize / maxSize;
+        double usageRatio = (double)count() / size();
         if (usageRatio <= reductionRatio) {
             int newMaxSize = (int)Math.ceil(count() * growthFactor);
             if (newMaxSize < size() && newMaxSize >= initialSize) {
@@ -126,7 +125,6 @@ public class BrailleLineBuffer implements LineBuffer {
                 newBuffer[i] = Arrays.copyOf(buffer[i], buffer[i].length);
             }
             buffer = newBuffer;
-            maxSize = newMaxSize;
         }
     }
 
@@ -142,7 +140,6 @@ public class BrailleLineBuffer implements LineBuffer {
     public void push(char[][] bitmap) {
         expandBuffer();
         insert(count(), bitmap);
-        currentSize++;
     }
 
     /**
@@ -227,7 +224,6 @@ public class BrailleLineBuffer implements LineBuffer {
     public void clearBuffer() {
         // TODO: implementation
         buffer = new char[initialSize][][];
-        maxSize = initialSize;
         currentSize = 0;
     }
 

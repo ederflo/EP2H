@@ -56,8 +56,7 @@ public class LinePrinter {
      *                   <p>Precondition: cellWidth > 0</p>
      */
     private void createLineBuffer(int lineLength, int cellHeight, int cellWidth) {
-        if (lineBuffer == null)
-            lineBuffer = new char[cellHeight][(lineLength * cellWidth) + ((lineLength - 1) * spacing)];
+        lineBuffer = new char[cellHeight][(lineLength * cellWidth) + ((lineLength - 1) * spacing)];
         for (int i = 0; i < lineBuffer.length; i++)
             for (int j = 0; j < lineBuffer[i].length; j++)
                 lineBuffer[i][j] = ' ';
@@ -80,7 +79,7 @@ public class LinePrinter {
      * Clears the line buffer by creating a new one and resetting the cursor position.
      */
     private void clearLine(){
-        createLineBuffer(-1, font.getHeight(), font.getWidth());
+        createLineBuffer((lineBuffer.length + spacing) / (font.getWidth() + spacing), font.getHeight(), font.getWidth());
         cursorPosition = 0;
     }
 
@@ -97,7 +96,7 @@ public class LinePrinter {
      * Checks if printing another char is possible
      */
     private boolean validPrint() {
-        return getCurrentIdx() + spacing + font.getWidth() <= lineBuffer[0].length;
+        return getCurrentIdx() == 0 || getCurrentIdx() + spacing + font.getWidth() <= lineBuffer[0].length;
     }
 
     /**
