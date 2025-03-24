@@ -53,6 +53,25 @@ public class Application {
         lp.flush();
 
         // TODO: implementation of any developer specific tests (optional)
-
+        lp.insertCharacter(1, 'm');
+        System.out.printf("buffer size: %d,  characters in buffer: %d%n", lineBuffer.size(), lineBuffer.count());
+        lp.insertCharacter(0, 'r');
+        lp.flush();
+        lp.insertCharacter(1, 'm');
+        lp.insertCharacter(1, 'a');
+        System.out.printf("buffer size: %d,  characters in buffer: %d%n", lineBuffer.size(), lineBuffer.count());
+        lp.printBackSpace();
+        System.out.printf("buffer size: %d,  characters in buffer: %d%n", lineBuffer.size(), lineBuffer.count());
+        lp.insertCharacter(0, 'a');
+        lp.deleteCharacter(2);
+        lp.insertCharacter(0, 'a');
+        lp.insertCharacter(0, 'a');
+        lp.insertCharacter(0, 'a');
+        lp.deleteCharacter(0);
+        lp.deleteCharacter(0);
+        lp.deleteCharacter(0);
+        lp.deleteCharacter(0);
+        lp.deleteCharacter(0);
+        System.out.printf("buffer size: %d,  characters in buffer: %d%n", lineBuffer.size(), lineBuffer.count());
     }
 }
