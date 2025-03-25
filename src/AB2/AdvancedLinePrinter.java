@@ -93,7 +93,7 @@ public class AdvancedLinePrinter {
      * and then clearing the buffer.
      */
     public void flush() {
-        String[] lines =lineBuffer.renderScanlines(getSpacing());
+        String[] lines = lineBuffer.renderScanlines(getSpacing());
         if (lines == null)
             return;
         for (String line : lines)

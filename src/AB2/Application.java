@@ -53,7 +53,7 @@ public class Application {
         lp.flush();
 
         // TODO: implementation of any developer specific tests (optional)
-        lp.insertCharacter(1, 'm');
+        lp.printCharacter('m');
         System.out.printf("buffer size: %d,  characters in buffer: %d%n", lineBuffer.size(), lineBuffer.count());
         lp.insertCharacter(0, 'r');
         lp.flush();

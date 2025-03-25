@@ -136,7 +136,8 @@ public class BrailleLineBuffer implements LineBuffer {
     @Override
     public void push(char[][] bitmap) {
         expandBuffer();
-        insert(count(), bitmap);
+        buffer[count()] = Arrays.copyOf(bitmap, bitmap.length);
+        currentSize++;
     }
 
     /**
@@ -174,7 +175,7 @@ public class BrailleLineBuffer implements LineBuffer {
      */
     @Override
     public boolean insert(int cursorPosition, char[][] bitmap) {
-        if (cursorPosition < 0 || cursorPosition > count())
+        if (cursorPosition < 0 || cursorPosition >= count())
             return false;
 
         expandBuffer();
