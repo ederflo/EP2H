@@ -2,8 +2,6 @@ package AB2;
 
 import AB2.Interfaces.LineBuffer;
 
-import java.util.Arrays;
-
 
 /**
  * The {@code BrailleLineBuffer} class implements an abstract data type for handling printable representation of
@@ -118,9 +116,7 @@ public class BrailleLineBuffer implements LineBuffer {
     private void resizeBuffer(int newMaxSize) {
         if (count() <= newMaxSize) {
             char[][][] newBuffer = new char[newMaxSize][][];
-            for (int i = 0; i < count(); i++) {
-                newBuffer[i] = Arrays.copyOf(buffer[i], buffer[i].length);
-            }
+            System.arraycopy(buffer, 0, newBuffer, 0, count());
             buffer = newBuffer;
         }
     }
@@ -136,7 +132,9 @@ public class BrailleLineBuffer implements LineBuffer {
     @Override
     public void push(char[][] bitmap) {
         expandBuffer();
-        buffer[count()] = Arrays.copyOf(bitmap, bitmap.length);
+        char[][] copy = new char[bitmap.length][];
+        System.arraycopy(bitmap, 0, copy, 0, bitmap.length);
+        buffer[count()] = copy;
         currentSize++;
     }
 
@@ -151,7 +149,8 @@ public class BrailleLineBuffer implements LineBuffer {
         if (count() == 0)
             return null;
 
-        char[][] result = Arrays.copyOf(buffer[count() - 1], buffer[count() - 1].length);
+        char[][] result = new char[buffer[count() - 1].length][];
+        System.arraycopy(buffer[count() - 1], 0, result, 0, buffer[count() - 1].length);
         buffer[count() - 1] = null;
         currentSize--;
         reduceBuffer();
@@ -180,9 +179,12 @@ public class BrailleLineBuffer implements LineBuffer {
 
         expandBuffer();
         for (int i = count(); i > cursorPosition; i--) {
-            buffer[i] = Arrays.copyOf(buffer[i - 1], buffer[i - 1].length);
+
+            buffer[i] = buffer[i - 1];
         }
-        buffer[cursorPosition] = Arrays.copyOf(bitmap, bitmap.length);
+        char[][] copy = new char[bitmap.length][];
+        System.arraycopy(bitmap, 0, copy, 0, bitmap.length);
+        buffer[cursorPosition] = copy;
         currentSize++;
 
         return true;
@@ -206,7 +208,7 @@ public class BrailleLineBuffer implements LineBuffer {
             return false;
 
         for (int i = cursorPosition; i < count() - 1; i++) {
-            buffer[i] = Arrays.copyOf(buffer[i + 1], buffer[i + 1].length);
+            buffer[i] = buffer[i + 1];
         }
         buffer[count() - 1] = null;
         currentSize--;

@@ -133,7 +133,10 @@ public class AdvancedLinePrinter {
      * @param spacing the number of blank screen spaces (ASCII columns) between Braille characters.
      *                Must be greater than or equal to 0.
      */
-    public void setSpacing(int spacing) {
+    public void setSpacing(int spacing)
+    {
+        if (spacing < 0)
+            return;
         this.spacing = spacing;
     }
 
