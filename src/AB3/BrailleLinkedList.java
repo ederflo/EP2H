@@ -227,7 +227,7 @@ public class BrailleLinkedList implements List {
         if (index <= 0)
             return removeFirst();
 
-        if (index >= size())
+        if (index >= size() - 1)
             return removeLast();
 
         ListNode nodeBefore = get(index - 1);

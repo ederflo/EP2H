@@ -48,9 +48,9 @@ public class BrailleDecoder implements Decoder {
             return 0;
 
         byte brailleCharBin = 0;
-        brailleCharBin |= (byte) ((bitMap[0][0] == dotSymbol ? 1 : 0)); // unterste Zeile -> Bit 0
+        brailleCharBin |= (byte) ((bitMap[0][0] == dotSymbol ? 1 : 0)); // oberste Zeile -> Bit 0
         brailleCharBin |= (byte) ((bitMap[1][0] == dotSymbol ? 1 : 0) << 1); // mittlere Zeile  -> Bit 1
-        brailleCharBin |= (byte) ((bitMap[2][0] == dotSymbol ? 1 : 0) << 2); // oberste Zeile   -> Bit 2
+        brailleCharBin |= (byte) ((bitMap[2][0] == dotSymbol ? 1 : 0) << 2); // unterste Zeile   -> Bit 2
 
         // Zweite Spalte: von oben nach unten
         brailleCharBin |= (byte) ((bitMap[0][1] == dotSymbol ? 1 : 0) << 3); // oberste Zeile   -> Bit 3
