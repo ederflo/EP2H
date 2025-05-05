@@ -18,8 +18,8 @@ public class MCTestAB3 {
 
                         new Choice(false, "n.next.next.next = n.next.next;                                               (1A)"),
                         new Choice(false, "n.next.next = n.next;                                                         (1B)"),
-                        new Choice(false, "Node g = n.next; n.next = g.next;                                             (1C)"),
-                        new Choice(false, "n.next = n.next.next;                                                         (1D)"),
+                        new Choice(true, "Node g = n.next; n.next = g.next;                                             (1C)"),
+                        new Choice(true, "n.next = n.next.next;                                                         (1D)"),
                         new Choice(false, "Node k = n.next.next; k.next = n;                                             (1E)")
                 ),
 
@@ -29,10 +29,10 @@ public class MCTestAB3 {
                         "    STree v = new STree(); v.add(7); v.add(8); v.add(4);\n" +
                         "Welche der folgenden Aussagen treffen auf v zu?",
 
-                        new Choice(false, "Der Knoten mit Wert 8 ist ein Blattknoten.                                    (2A)"),
+                        new Choice(true, "Der Knoten mit Wert 8 ist ein Blattknoten.                                    (2A)"),
                         new Choice(false, "Der Baum hat maximale Tiefe für einen Baum mit 3 Knoten.                      (2B)"),
-                        new Choice(false, "Der Knoten mit Wert 7 hat zumindest ein Kind.                                 (2C)"),
-                        new Choice(false, "Der Knoten mit Wert 7 ist die Wurzel.                                         (2D)"),
+                        new Choice(true, "Der Knoten mit Wert 7 hat zumindest ein Kind.                                 (2C)"),
+                        new Choice(true, "Der Knoten mit Wert 7 ist die Wurzel.                                         (2D)"),
                         new Choice(false, "Der Knoten mit Wert 8 ist Elter von dem mit Wert 7.                           (2E)")
                 )
         );

@@ -1,0 +1,32 @@
+Ausgabe des Compilers (kann leer sein):
+Ausgabe der Tests:
+* BrailleReader.java <1.0>
+  (0) BrailleReader.getBrailleChar/translate() [OK]
+* BrailleListBuffer.java <0.8571428571428571>
+  (0) BrailleListBuffer.size() [OK]
+  (1) BrailleListBuffer.push() [OK]
+  (2) BrailleListBuffer.pop() [OK]
+  (3) BrailleListBuffer.insert() [OK]
+  (4) BrailleListBuffer.delete() [FAIL]
+  (5) BrailleListBuffer.clearBuffer() [OK]
+  (6) BrailleListBuffer.renderScanlines() [OK]
+* BrailleLinkedList.java <2.0>
+  (0) BrailleLinkedList.constructor() [OK]
+  (1) BrailleLinkedList.size() [OK]
+  (2) BrailleLinkedList.addFirst() [OK]
+  (3) BrailleLinkedList.getFirst() [OK]
+  (4) BrailleLinkedList.removeFirst() [OK]
+  (5) BrailleLinkedList.addLast() [OK]
+  (6) BrailleLinkedList.getLast() [OK]
+  (7) BrailleLinkedList.removeLast() [OK]
+  (8) BrailleLinkedList.get() [OK]
+  (9) BrailleLinkedList.insert() [OK]
+  (10) BrailleLinkedList.remove() [OK]
+  (11) BrailleLinkedList.clear() [OK]
+* BrailleSymbolTree.java <2.0>
+  (0) BrailleSymbolTree.addNode() [OK]
+  (1) BrailleSymbolTree.getNode() [OK]
+  (2) BrailleSymbolTree: check fully built tree [OK]
+* BrailleDecoder.java <1.0>
+  (0) BrailleDecoder.decodeBitmap() [OK]
+Gesamt: 7 Punkte (ohne Aufrundung: 6.85714 Punkte)

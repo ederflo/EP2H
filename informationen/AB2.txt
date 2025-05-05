@@ -1,0 +1,22 @@
+Ausgabe des Compilers (kann leer sein):
+Ausgabe der Tests:
+* BrailleLineBuffer.java <2.9814814814814814>
+  (0) BrailleLineBuffer.constructor & size() [OK]
+  (1) BrailleLineBuffer.count() [OK]
+  (2) BrailleLineBuffer.expandBuffer() [OK]
+  (3) BrailleLineBuffer.reduceBuffer() [FAIL]
+  (4) BrailleLineBuffer.push() [OK]
+  (5) BrailleLineBuffer.pop() [OK]
+  (6) BrailleLineBuffer.insert() [OK]
+  (7) BrailleLineBuffer.delete() [OK]
+  (8) BrailleLineBuffer.clearBuffer() [OK]
+  (9) BrailleLineBuffer.renderScanlines() [OK]
+* AdvancedLinePrinter.java <1.5>
+  (0) AdvancedLinePrinter.clearLine() [OK]
+  (1) AdvancedLinePrinter.printCharacter() [OK]
+  (2) AdvancedLinePrinter.printBackSpace() [OK]
+  (3) AdvancedLinePrinter.printString() [OK]
+  (4) AdvancedLinePrinter.insertCharacter() [OK]
+  (5) AdvancedLinePrinter.deleteCharacter() [OK]
+  (6) AdvancedLinePrinter.flush() [OK]
+Gesamt: 5 Punkte (ohne Aufrundung: 4.48148 Punkte)
