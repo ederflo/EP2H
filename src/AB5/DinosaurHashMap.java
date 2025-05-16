@@ -70,6 +70,7 @@ public class DinosaurHashMap implements HashMap {
      */
     private BucketList[] reorganizeBuckets(int newCapacity) {
         BucketList[] result = new BucketList[newCapacity > 0 ? newCapacity : DEFAULT_NUM_OF_BUCKETS];
+        maxBucketSize = result.length;
         for (int i = 0; i < result.length; i++)
             result[i] = new DinosaurBucketList();
         DinosaurHashMapIterator iterator = new DinosaurHashMapIterator(buckets);

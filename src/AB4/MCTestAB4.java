@@ -20,7 +20,7 @@ public class MCTestAB4 {
                         new Choice(true, "D ist Untertyp von W.                                                         (1B)"),
                         new Choice(false, "'(J)null' liefert einen Laufzeitfehler.                                       (1C)"),
                         new Choice(false, "'(J)x' ändert den dynamischen Typ von x auf J.                                (1D)"),
-                        new Choice(false, "Mit 'D ist Untrtyp von J' gilt: '((J)x).getClass() == J.class'               (1E)")
+                        new Choice(false, "Mit 'D ist Untertyp von J' gilt: '((J)x).getClass() == J.class'               (1E)")
                 ),
 
                 new Question(
